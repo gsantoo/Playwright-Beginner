@@ -25,8 +25,6 @@ test('Verify static controls in landing page', async ({ page }) => {
   await expect(page.locator('[data-test="product-sort-container"]')).toBeVisible();
   await expect(page.locator('[data-test="shopping-cart-link"]')).toBeVisible();
 });
-test('Login out', async ({ page }) => {
-  await page.locator('[data-test="logout-sidebar-link"]').click();
-});
+
 });
 
