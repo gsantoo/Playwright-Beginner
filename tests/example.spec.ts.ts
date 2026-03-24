@@ -1,26 +1,19 @@
-
 import { test, expect } from '@playwright/test';
-test.describe('Login Tests', () => {
 
-test('Verify incorrect password', async ({ page }) => {
-  const url = 'https://www.saucedemo.com/';
-  await page.goto(url);
-  const userName = page.locator('[data-test="username"]');
-  await userName.click();
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="username"]').press('Tab');
-  await page.locator('[data-test="password"]').fill('scrret_sauce');
-  await page.locator('[data-test="login-button"]').click();
-  await expect(page.locator('[data-test="error"]')).toContainText('Epic sadface: Username and password do not match any user in this service');
+test('has title', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+
+  // Expect a title "to contain" a substring.
+  await expect(page).toHaveTitle(/Playwright/);
 });
 
-test('Login', async ({ page }) => {
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
-    await page.getByRole('button', { name: 'Open Menu' }).click();
+test('get started link', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
 
-})
+  // Click the get started link.
+  await page.getByRole('link', { name: 'Get started' }).click();
 
-
+  // Expects page to have a heading with the name of Installation.
+  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
 });
-
+//this is my first test file, I am learning how to use playwright and I am excited to write more tests!
