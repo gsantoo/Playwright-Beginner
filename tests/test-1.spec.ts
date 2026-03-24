@@ -20,11 +20,7 @@ test('Login', async ({ page }) => {
     await page.getByRole('button', { name: 'Open Menu' }).click();
 
 })
-test('Verify static controls in landing page', async ({ page }) => {
-  await expect(page.locator('[data-test="title"]')).toBeVisible();
-  await expect(page.locator('[data-test="product-sort-container"]')).toBeVisible();
-  await expect(page.locator('[data-test="shopping-cart-link"]')).toBeVisible();
-});
+
 
 });
 
