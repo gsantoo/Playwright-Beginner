@@ -1,19 +1,31 @@
-import { test, expect } from '@playwright/test';
+import { test, type Page, expect, Browser  } from '@playwright/test';
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+ 
+test.describe('navigation', () => {
+   let page: Page;
+  let browser: Browser;
+  test.beforeAll(async ({ browser }) => {
+     const context = await browser.newContext();
+    page = await context.newPage();
+    await page.goto('https://playwright.dev/');
+  });
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+    test.afterAll(async () => {
+   await page.context().browser()?.close();
+  });
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
 
-  // Click the get started link.
+  test('test 1', async () => {
+  // await page.goto('https://playwright.dev/');
   await page.getByRole('link', { name: 'Get started' }).click();
+  await expect(page.locator('h1')).toContainText('Installation');
+  await page.getByRole('link', { name: 'API', exact: true }).click();
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
 });
-//this is my first test file, I am learning how to use playwright and I am excited to write more tests!
+  test('test 2', async () => {
+  // await page.goto('https://playwright.dev/');
+  await page.getByRole('button', { name: 'Search (Ctrl+K)' }).click();
+  await page.getByRole('searchbox', { name: 'Search' }).fill('API Request');
+  await page.getByRole('button', { name: 'Clear the query' }).click();
+});
+});
