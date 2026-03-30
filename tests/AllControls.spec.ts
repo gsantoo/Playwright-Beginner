@@ -52,7 +52,7 @@ const rows = table.locator('tr');
   // Start loop from index 1 to skip the header row (tr[0])
   for (let i = 1; i < rowCount; i++) {
     const actualRowValues = await rows.nth(i).locator('td').allInnerTexts();
-
+    console.log(`Row ${i}:`, actualRowValues);
    expect(actualRowValues).toEqual(expectedData[i - 1]);
 //   await expect(slider).toHaveValue('59'); 
   }
